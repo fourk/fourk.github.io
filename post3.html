@@ -1,0 +1,19 @@
+As some of you may know, I recently began working at Focus Research as a Software Engineer, shipping Django, jQuery, Python, etc. Part of the process of ramping up to own the parts of the site I was hired to handle, particularly the site's News Feed, has been to fix all the existing bugs in PivotalTracker that relate to the Feed as a way to dig in and get a better sense of the existing code. 
+Recently I was tasked with fixing a bug where on specific portions of the feed, a particular user's profile image did not display. Trying to replicate the bug was difficult without the ability to create a piece of content originating from that user's account, so I started looking into what might be the easiest way to create content from that user's account on my local environment. My boss, Dan, forwarded me a link to Impostor mentioning that he'd read the description and bookmarked it, but had gone no further with it than that.
+
+The installation instructions claimed it was easy as adding a line to AUTHENTICATION_BACKENDS in settings.py and a line to INSTALLED_APPS. Unfortunately, AUTHENTICATION_BACKENDS seemed to be missing from our settings file. This may be an artifact of the way our code was originally designed to run on Django 0.96, but I'm not really sure, I wasn't writing Django code back then. I added a line for that setting, hoping that getting Impostor to work would be as easy as advertised. 
+
+Once installed, a user with the staff flag enabled on their account can log into another user's account by using the following login string as their username, with their usual password.
+
+staff_username as user_username
+
+Attempted logging in through our interstitial login form. No dice. Attempted logging in through a secondary login form. Attempted logging in through the django admin panel. All of these returned errors suggesting that they had failed form validation when comparing a string involving two email addresses and whitespace to validation rules expecting a single email address.
+
+After realizing that this was not going to be a drag and drop solution, I hacked up the following solution to get Impostor working. The noteworthy changes to the normal authentication process are as follows:
+
+I had to remove the lines from the clean() method that call request.session.test_cookie_worked() because that method was returning False despite the fact that cookies seemingly work on my development box, using Impostor or the default authentication backend. 
+
+I had to add the backend attribute to the user object, setting it to 'impostor.backend.AuthBackend' after retrieving it from the form, before passing it to django.contrib.auth.login(request, user).
+
+Below I've embedded a Github Gist containing the view method and form that we used to get Impostor working at Focus.
+https://gist.github.com/fourk/859709
