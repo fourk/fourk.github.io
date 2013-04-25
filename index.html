@@ -1,53 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Fourk.github.io by fourk</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Fourk.github.io : " />
 
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Fourk.github.io</title>
   </head>
+
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/fourk">View On GitHub</a></li>
-        </nav>
-      </div><!-- end header -->
 
-    <div class="wrapper">
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/fourk">View on GitHub</a>
 
-      <section>
-        <div id="title">
-          <h1>Fourk.github.io</h1>
-          <p></p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/fourk">fourk</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
-        </div>
+          <h1 id="project_title">Fourk.github.io</h1>
+          <h2 id="project_tagline"></h2>
 
-        <p>I've been working for the past few months learning serverside Javascript development using Node.js to build a new Events platform for Focus.com. We had been running our Roundtable events over phone systems, where listeners would dial in at a specified time to listen to the panels speak, with very little interactivity on the part of the listeners to the panelists. We were looking for a way to improve the accessibility and interactivity of the event experience. Our goals for the project were to:</p>
+        </header>
+    </div>
 
-<p>Provide a single stream for consuming all event related content (tweets, chat, and Q&amp;A being the 3 primary content types)
-Provide some democratization of the content of the events, allowing users to vote on the issues they wanted to see the panelists address, during the event. 
-Allow users to provide feedback on the current topic of discussion, as well as gather that data for later use in highlighting the best parts of the event as decided by attendees for those who later want to listen to a replay of the talk.
-With these objectives in mind, I began digging around in search of the best technologies to leverage to accomplish these goals. To give you some history on our webstack, we've been rocking Django since 0.96, which has met all of our previous needs and then some. However, Django is not really suitable for the sort of web app experience we had in mind, where chat and other actions need to be broadcast to anywhere between tens to hundreds of users (while being scalable to thousands if need be) in as close to real time as possible. In our search for figuring out the best tools to use for this, we had several requirements:</p>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Building a Node.js Events App Using RabbitMQ, Websockets, and Django</h1>
 
-<p>Fast- This needed to be able to handle communication with hundreds of simultaneous users without noticeable delays in sending and receiving data in real-time. 
-Scalable- We needed to be able to offer HA (High Availability) scaling for this service, ensuring that we did not introduce any single point of failure that could disrupt the experience.
-Capable of sending and receiving data in real time - Needed to support a large number of concurrent connections at relatively low latency.
-Easily integratable into our current Django site- Using the Django ORM (talking to MySQL) for managing all of the persistence of data was our best option for using that content elsewhere on our site, and preventing any additional points of failure from being introduced.
-No new languages- We didn't want to have to do any significant development with any language our developers were not already familiar with. This basically limited us to Python and Javascript. 
-In the end, we resolved to add two new pieces of tech to our stack: RabbitMQ and Node.js.</p>
+<p>I've been working for the past few months learning serverside Javascript development using Node.js to build a new Events platform for Focus.com. We had been running our Roundtable events over phone systems, where listeners would dial in at a specified time to listen to the panels speak, with very little interactivity on the part of the listeners to the panelists. We were looking for a way to improve the accessibility and interactivity of the event experience. Our goals for the project were to:</p>
+
+<ul>
+<li>Provide a single stream for consuming all event related content (tweets, chat, and Q&amp;A being the 3 primary content types)</li>
+<li>Provide some democratization of the content of the events, allowing users to vote on the issues they wanted to see the panelists address, during the event. </li>
+<li>Allow users to provide feedback on the current topic of discussion, as well as gather that data for later use in highlighting the best parts of the event as decided by attendees for those who later want to listen to a replay of the talk.</li>
+</ul><p>With these objectives in mind, I began digging around in search of the best technologies to leverage to accomplish these goals. To give you some history on our webstack, we've been rocking Django since 0.96, which has met all of our previous needs and then some. However, Django is not really suitable for the sort of web app experience we had in mind, where chat and other actions need to be broadcast to anywhere between tens to hundreds of users (while being scalable to thousands if need be) in as close to real time as possible. In our search for figuring out the best tools to use for this, we had several requirements:</p>
+
+<ul>
+<li>
+<strong>Fast</strong>- This needed to be able to handle communication with hundreds of simultaneous users without noticeable delays in sending and receiving data in real-time. </li>
+<li>
+<strong>Scalable</strong>- We needed to be able to offer HA (High Availability) scaling for this service, ensuring that we did not introduce any single point of failure that could disrupt the experience.</li>
+<li>
+<strong>Capable of sending and receiving data in real time</strong> - Needed to support a large number of concurrent connections at relatively low latency.</li>
+<li>
+<strong>Easily integratable into our current Django site</strong>- Using the Django ORM (talking to MySQL) for managing all of the persistence of data was our best option for using that content elsewhere on our site, and preventing any additional points of failure from being introduced.</li>
+<li>
+<strong>No new languages</strong>- We didn't want to have to do any significant development with any language our developers were not already familiar with. This basically limited us to Python and Javascript. </li>
+</ul><p>In the end, we resolved to add two new pieces of tech to our stack: <strong>RabbitMQ</strong> and <strong>Node.js</strong>.</p>
 
 <p>RabbitMQ is an Erlang implementation of AMQP (Advanced Message Queuing Protocol). "AMQP is middleware to provide a point of rendezvous between back-end systems (data stores and services) and front end systems such as end user applications."<a href="http://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol#Overview">1</a> Node.js is pretty much the hotness right now, recently taking the crown from Rails for being the cool new tech on the block (if Github traffic is any indication). Node.js offered us the opportunity to use Javascript both serverside and clientside for the events application. </p>
 
@@ -57,13 +58,13 @@ In the end, we resolved to add two new pieces of tech to our stack: RabbitMQ and
 
 <p>Since that early diagram, the only real change was that the majority of content-related data is now sent by the Nodejs layer to the client after the client handshakes with Node. The content that is static per event is cached at the page level in the Django layer. </p>
 
-<p>Architecture within Django</p>
+<h3>Architecture within Django</h3>
 
 <p>We have 8 models defined in the Django ORM that contain data needed by the live event app. These include all of the primary forms of content in the first bullet point in this post, as well as all secondary forms of content that relate to those primary ones (ie: things like votes, answers to questions, etc.). I added to each of these models a 'to_json_serializable' method, which returns a Python dictionary object representing all relevant data for an object of that model that can be JSON serialized.</p>
 
 <p>I bound the following post_save signal handler to all 8 models:</p>
 
-<p>(EDIT: Link for if the embed doesn't appear)</p>
+<p>(EDIT: <a href="https://gist.github.com/1230459">Link</a> for if the embed doesn't appear)</p>
 
 <p>I leverage memcached here to determine if the output from to_json_serializable has changed since last save to reduce unnecessary data transfer (ie: if some object attributes change, but the relevant attributes do not).</p>
 
@@ -71,7 +72,7 @@ In the end, we resolved to add two new pieces of tech to our stack: RabbitMQ and
 
 <p>The last architecture change within Django was building a full RESTful API for accessing and modifying all of these models. The GET requests to the API leverage the to_json_serializable methods, while the POST requests are able to use a user's existing Django user account and authentication state for managing access control. </p>
 
-<p>Architecture within Node.js</p>
+<h3>Architecture within Node.js</h3>
 
 <p>Working with Node.js was a ton of fun, and introduced me to an event-driven programming style. We used socket.io for managing connections from the browser to Node.js, a web transport library with both client and serverside Javascript, designed specifically for use in real time web applications, It manages the transfer of data between those entities. </p>
 
@@ -83,9 +84,16 @@ In the end, we resolved to add two new pieces of tech to our stack: RabbitMQ and
 
 <p>Overall, I'm extremely happy with how the finished product has come together, and believe that we made the right architecture decisions here. Please leave any questions or comments, I'd be happy to go into further detail about any aspect that I may have glossed over. </p>
       </section>
-
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
     
+
   </body>
 </html>
