@@ -54,6 +54,8 @@
 
 <p>So, technologies chosen, I set out learning how to develop using Node.js's event-driven model. After a couple prototype iterations we found an architecture that would accomplish our goals. Here's an early diagram of it:</p>
 
+<p><img src="/images/architecture.jpg" alt="Architecture"></p>
+
 <p>(Disclaimer: I don't know UML. I am terrible at flowcharts. Sorry)</p>
 
 <p>Since that early diagram, the only real change was that the majority of content-related data is now sent by the Nodejs layer to the client after the client handshakes with Node. The content that is static per event is cached at the page level in the Django layer. </p>
